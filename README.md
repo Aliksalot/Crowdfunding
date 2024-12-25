@@ -1,3 +1,14 @@
+** Hello,
+This is the project that I am building in hopes of graduating SPGE John Atansoff in Sofia.
+
+Tech stack is somewhat modern,
+I am using angular
+Backend is with express, postgre and prisma.
+I will upload some demo videos when its completed.
+Project is basically a kickstarted clone.
+
+This below are the requirements in Bulgarian.
+
 ЗАДАНИЕ ЗА ПРОЕКТ
 
 На: Александър Красенов Колев, Клас: 12 “Б”
