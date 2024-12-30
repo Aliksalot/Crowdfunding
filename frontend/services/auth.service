@@ -1,0 +1,24 @@
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+)}
+
+export class AuthService{
+  private loggedInEmail = null;
+
+  login(email: string, passwordAttempt: string){
+    //TODO login
+  }
+
+  logout(){
+
+  }
+
+  getLoggedInEmail(){
+    return this.loggedInEmail;
+  }
+
+
+}
+

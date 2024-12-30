@@ -1,0 +1,60 @@
+<header>
+  <logo />
+</header>
+<main>
+  <section>
+    <h1>
+      Регистрация
+    </h1>
+    <form [formGroup]="form"  (ngSubmit)="onSubmit()">
+      <div class='field-cnt'>
+        <input 
+         (input)="onChange()"
+         placeholder='Имейл'
+         type='email'
+         formControlName='email'
+         required
+        >
+        <div *ngIf="(form.get('email')?.invalid || isEmailTaken) && isSubmited">
+          <p *ngIf="form.get('email')?.hasError('required')">Това поле е задължително!</p>
+          <p *ngIf="form.get('email')?.hasError('email')">Имейлът е невалиден!</p>
+          <p *ngIf="isEmailTaken">Този имейл вече е зает! Ако профилът е ваш, можете да влезете от <a href='/login'>тук.</a></p>
+        </div>
+      </div>
+      <div class='field-cnt'>
+        <input 
+         (input)="onChange()"
+         placeholder='Парола'
+         type='password'
+         formControlName='pass'
+         required
+        />
+        <div *ngIf="form.get('pass')?.invalid && isSubmited">
+          <p *ngIf="form.get('pass')?.hasError('required')">Това поле е задължително!</p>
+          <p *ngIf="form.get('pass')?.hasError('minlength')">Минимална дължина на паролата е 6 символа!</p>
+        </div>
+      </div>
+      <div class='field-cnt'>
+        <input 
+         (input)="onChange()"
+         placeholder='Повторете Парола'
+         type='password'
+         formControlName='passConfirm'
+         required
+        />
+        <div *ngIf="(form.get('passConfirm')?.invalid || form.get('passConfirm')?.value !== form.get('pass')?.value) && isSubmited">
+          <p *ngIf="form.get('passConfirm')?.hasError('required')">Това поле е задължително!</p>
+          <p *ngIf="form.get('passConfirm')?.hasError('minlength')">Минимална дължина на паролата е 6 символа!</p>
+          <p *ngIf="form.get('passConfirm')?.value !== form.get('pass')?.value">Паролите не съвпадат!</p>
+        </div>
+      </div>
+      <button>
+        Регистриранe
+      </button>
+    </form>
+    <div>
+      Вече имате профил? <a href='/login'>Вход</a>
+    </div>
+  </section>
+</main>
+

@@ -1,0 +1,30 @@
+<header>
+  <logo />
+</header>
+<main>
+  <section>
+    <h1>
+      Вход
+    </h1>
+    <form [formGroup]='form' (ngSubmit)="onSubmit()">
+      <input 
+       placeholder='Имейл'
+       type='email'
+       formControlName='email'
+       (input)='onChange()'
+      />
+      <input 
+       placeholder='Парола'
+       type='password'
+       formControlName='pass'
+       (input)='onChange()'
+      />
+      <button>
+        Вход
+      </button>
+    </form>
+    <div>
+      Нямате профил? <a href='/register'>Създайте си сега!</a>
+    </div>
+  </section>
+</main>

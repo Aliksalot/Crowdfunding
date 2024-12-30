@@ -1,15 +1,36 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
+import session from 'express-session';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
+import { authenticateJWT } from './utils/auth';
+
+//routers
+import userRouter from './routes/user';
 
 dotenv.config();
 
-const { PORT } = process.env;
+const { API_PORT } = process.env;
 const app = express();
 
-app.get('/', (req, res) => {
+app.use(
+  session({
+    secret: 'your_secret_key',
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: false }
+  })
+)
+
+app.use(cookieParser());
+app.use(express.json());
+
+app.use('/user', userRouter);
+
+app.get('/', (req: Request, res: Response) => {
   res.send('test');
 })
 
-app.listen(3000, () => {
-  console.log(`Listening on ${PORT}.`);
+
+app.listen(API_PORT, () => {
+  console.log(`Listening on ${API_PORT}.`);
 })

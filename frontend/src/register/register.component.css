@@ -1,0 +1,60 @@
+header{
+  width: 100%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+}
+main{
+  width: 100%;
+  display: flex;
+  padding-top: 5rem;
+}
+main > section {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 0 1.5rem rgba(0, 0, 0, .2);
+
+  flex-grow: 1;
+  max-width: 600px;
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+}
+main > section > form{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.field-cnt{
+  display: flex;
+  flex-direction: column;
+}
+.field-cnt > input {
+  border: none;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+  padding: .5rem 1rem;
+  border-radius: .7rem;
+}
+.field-cnt > button {
+  border: none;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+  padding: .5rem 1rem;
+  border-radius: .7rem;
+  cursor: pointer;
+}
+main > section > div {
+  display: flex;
+  text-align: center;
+  justify-content: center;
+
+}
+main > section > div > a {
+  color: blue;
+  text-decoration: none;
+  text-align: center;
+  margin-left: 3pt;
+}
+

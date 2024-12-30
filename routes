@@ -1,0 +1,11 @@
+/api
+  /user
+    /login
+    /register
+  /offer
+  /report
+  /comment
+
+
+// subroutes /all ex. /report/all exec shit on all
+
