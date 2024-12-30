@@ -7,12 +7,20 @@ const userRouter = Router();
 
 const prisma = new PrismaClient();
 
-userRouter.get('/', authenticateJWT, async (req: Request, res: Response) => {
+userRouter.get('/all', authenticateJWT, async (req: Request, res: Response) => {
 
   const data = await prisma.user.findMany();
 
   res.json(data);
 });
+
+userRouter.get('/', authenticateJWT, async(req: Request, res: Response) => {
+
+  const user = await prisma.user.findFirst({ where: { id: (req.session as any).userId.userId }});
+  
+  res.status(200).send({ email: user?.email });
+
+})
 
 
 userRouter.get('/logout', authenticateJWT, (req: Request, res: Response) => {

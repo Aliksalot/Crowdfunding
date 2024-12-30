@@ -12,6 +12,14 @@ export class AuthService{
 
   constructor(private http: HttpClient, private router: Router) {};
 
+  loginWOPass() {
+    this.http.get('/api/user').subscribe({
+      next: (response) => {
+        this.loggedInEmail = (response as any).email;
+      }
+    })
+  }
+
   login(email: string, passwordAttempt: string): Observable<any>{
     const request = this.http.post('/api/user/login', { email, passwordAttempt });
     request.subscribe({
