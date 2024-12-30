@@ -7,8 +7,7 @@ import {Router} from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService{
-  private loggedInEmail: string | null  = null;
-  private previousRoute: string = '';
+  private loggedInEmail: string | undefined | null = undefined;
 
   constructor(private http: HttpClient, private router: Router) {};
 
@@ -16,6 +15,7 @@ export class AuthService{
     this.http.get('/api/user').subscribe({
       next: (response) => {
         this.loggedInEmail = (response as any).email;
+        sessionStorage.setItem('e', this.loggedInEmail as string);
       }
     })
   }
@@ -27,9 +27,7 @@ export class AuthService{
         console.log(result);
         if(result){
           this.loggedInEmail = result as string;
-          const temp = this.previousRoute;
-          this.previousRoute = '';
-          this.router.navigate([temp]);
+          sessionStorage.setItem('e', this.loggedInEmail);
         }else{
           this.router.navigate(['/login']);
         }
@@ -47,7 +45,10 @@ export class AuthService{
   }
 
   getLoggedInEmail(){
-    this.previousRoute = this.router.url;
+    if(this.loggedInEmail === undefined){
+      this.loggedInEmail = sessionStorage.getItem('e') === undefined ? null : sessionStorage.getItem('e');
+    }
+
     return this.loggedInEmail;
   }
 
