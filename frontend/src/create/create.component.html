@@ -1,0 +1,45 @@
+<header class='default-header'>
+  <logo />
+</header>
+<main>
+  <section>
+      <h1 class='mainh1'> Превърнете идеята си в реалност! </h1>
+      <h2 class='mainh2'> За по-малко от 5 минути можете да наберете средства, с които за сбъднете предприемаческите си мечти</h2>
+    <section class='step-one' *ngIf='!isContinued'>
+      
+      <section class='select category'>
+        <h3>В коя свера на бита планирате да разработите бизнеса си?</h3>
+        <select [(ngModel)]="model.category"(input)='onStepOneInput()'>
+          <option *ngFor="let category of categories | enumToArray" [value]="category.key">
+          {{ category.val }}
+          </option>
+        </select>
+      </section>
+
+      <section class='select location' (input)='onStepOneInput()'>
+        <h3>Къде ще разпожите бизнеса си?</h3>
+        <select [(ngModel)]="model.location">
+          <option *ngFor="let country of countries | enumToArray" [value]="country.key">
+          {{ country.val }}
+          </option>
+        </select>
+      </section>
+      
+      <section class='select price'>
+        <h3>Колко пари целите да наберете?</h3>
+        <h4 class='subtext'>*В български лева</h4>
+        <input [(ngModel)]='model.money' type='number' placeholder='0-100.0000' min='0' max='1000000' (input)='onStepOneInput()'/>
+      </section>
+      <div class='continue-button-cnt' *ngIf="!isContinued">
+        <button [ngClass]="{'active': isContinueAllowed}" (click)='_continue()'>
+          Продължаване
+        </button>
+      </div>
+      
+    </section>
+
+    <section class='step-two'>
+    </section>
+
+  </section>
+</main>

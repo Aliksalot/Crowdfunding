@@ -1,4 +1,23 @@
 /* You can add global styles to this file, and also import other style files */
 :root{
   --text-active: navy;
+  --content-width: 1400px;
+}
+
+@font-face{
+  font-family: 'font';
+  src: url('assets/fonts/Audex.ttf') format('truetype'),
+       url('assets/fonts/AudexItalic.ttf') format('truetype');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+body, body *{
+  font-family: 'font', sans-serif;
+}
+
+.default-header{
+  width: 100%;
+  display: grid;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
