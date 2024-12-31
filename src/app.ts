@@ -6,6 +6,7 @@ import { authenticateJWT } from './utils/auth';
 
 //routers
 import userRouter from './routes/user';
+import offerRouter from './routes/offer';
 
 dotenv.config();
 
@@ -25,6 +26,8 @@ app.use(cookieParser());
 app.use(express.json());
 
 app.use('/user', userRouter);
+
+app.use('/offer', offerRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('test');

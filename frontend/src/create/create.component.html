@@ -61,7 +61,7 @@
 
       <div class='action-buttons'>
         <button class='back' (click)='goBack()'>Назад</button>
-        <button class='continue'[ngClass]="{'active': isCreateAllowed}">Създай оферта</button>
+        <button class='continue'[ngClass]="{'active': isCreateAllowed}" (click)='submit()'>Създай оферта</button>
       </div>
     </section>
 

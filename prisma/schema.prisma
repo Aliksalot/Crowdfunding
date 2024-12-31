@@ -1,7 +1,7 @@
-// This is your Prisma schema file,
+// This is your Prisma schema file
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Looking for ways to speed up your queries or scale easily with your serverless or edge functions?
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
@@ -20,3 +20,253 @@ model User {
   isAdmin      Boolean  @default(false)
   dateCreated  DateTime @default(now())
 }
+
+model Offer {
+  id           Int      @id @default(autoincrement())
+  title        String
+  cover        String
+  text         String
+  goal         Int
+  location     Country  @default(Bulgaria)
+  category     Category @default(Art)
+  createdAt    DateTime @default(now())
+  approved     Boolean  @default(false)
+  creator      Int
+  raised       Int      @default(0)
+}
+
+enum Country {
+  Afghanistan 
+  Albania
+  Algeria
+  Andorra
+  Angola
+  AntiguaAndBarbuda
+  Argentina
+  Armenia
+  Australia
+  Austria
+  Azerbaijan
+  Bahamas
+  Bahrain
+  Bangladesh
+  Barbados
+  Belarus
+  Belgium
+  Belize
+  Benin
+  Bhutan
+  Bolivia
+  BosniaAndHerzegovina
+  Botswana
+  Brazil
+  Brunei
+  Bulgaria
+  BurkinaFaso
+  Burundi
+  CaboVerde
+  Cambodia
+  Cameroon
+  Canada
+  CentralAfricanRepublic
+  Chad
+  Chile
+  China
+  Colombia
+  Comoros
+  CostaRica
+  Croatia
+  Cuba
+  Cyprus
+  CzechRepublic
+  DemocraticRepublicOfTheCongo
+  Denmark
+  Djibouti
+  Dominica
+  DominicanRepublic
+  EastTimor
+  Ecuador
+  Egypt
+  ElSalvador
+  EquatorialGuinea
+  Eritrea
+  Estonia
+  Eswatini
+  Ethiopia
+  Fiji
+  Finland
+  France
+  Gabon
+  Gambia
+  Georgia
+  Germany
+  Ghana
+  Greece
+  Grenada
+  Guatemala
+  Guinea
+  GuineaBissau
+  Guyana
+  Haiti
+  Honduras
+  Hungary
+  Iceland
+  India
+  Indonesia
+  Iran
+  Iraq
+  Ireland
+  Israel
+  Italy
+  IvoryCoast
+  Jamaica
+  Japan
+  Jordan
+  Kazakhstan
+  Kenya
+  Kiribati
+  KoreaNorth
+  KoreaSouth
+  Kuwait
+  Kyrgyzstan
+  Laos
+  Latvia
+  Lebanon
+  Lesotho
+  Liberia
+  Libya
+  Liechtenstein
+  Lithuania
+  Luxembourg
+  Madagascar
+  Malawi
+  Malaysia
+  Maldives
+  Mali
+  Malta
+  MarshallIslands
+  Mauritania
+  Mauritius
+  Mexico
+  Micronesia
+  Moldova
+  Monaco
+  Mongolia
+  Montenegro
+  Morocco
+  Mozambique
+  Myanmar
+  Namibia
+  Nauru
+  Nepal
+  Netherlands
+  NewZealand
+  Nicaragua
+  Niger
+  Nigeria
+  NorthMacedonia
+  Norway
+  Oman
+  Pakistan
+  Palau
+  Panama
+  PapuaNewGuinea
+  Paraguay
+  Peru
+  Philippines
+  Poland
+  Portugal
+  Qatar
+  Romania
+  Russia
+  Rwanda
+  SaintKittsAndNevis
+  SaintLucia
+  SaintVincentAndTheGrenadines
+  Samoa
+  SanMarino
+  SaoTomeAndPrincipe
+  SaudiArabia
+  Senegal
+  Serbia
+  Seychelles
+  SierraLeone
+  Singapore
+  Slovakia
+  Slovenia
+  SolomonIslands
+  Somalia
+  SouthAfrica
+  SouthSudan
+  Spain
+  SriLanka
+  Sudan
+  Suriname
+  Sweden
+  Switzerland
+  Syria
+  Taiwan
+  Tajikistan
+  Tanzania
+  Thailand
+  Togo
+  Tonga
+  TrinidadAndTobago
+  Tunisia
+  Turkey
+  Turkmenistan
+  Tuvalu
+  Uganda
+  Ukraine
+  UnitedArabEmirates
+  UnitedKingdom
+  UnitedStates
+  Uruguay
+  Uzbekistan
+  Vanuatu
+  VaticanCity
+  Venezuela
+  Vietnam
+  Yemen
+  Zambia
+  Zimbabwe
+}
+
+enum Category {
+  Art  
+  FoodAndBeverages  
+  Technology  
+  Sports  
+  Music  
+  FilmAndVideo  
+  Fashion  
+  Design  
+  HealthAndBeauty  
+  VideoGames  
+  Education  
+  Travel  
+  NatureAndEnvironment  
+  ResearchAndScience  
+  Pets  
+  PersonalProjects  
+  InteriorAndArchitecture  
+  HomeImprovement  
+  TransportationAndMobility  
+  Photography  
+  Books  
+  SocialInitiatives  
+  Cosmetics  
+  RestaurantsAndCafes  
+  WritingAndPublishing  
+  SportsGoodsAndEquipment  
+  AnimalsAndNature  
+  HealthyEating  
+  EventsAndFestivals  
+  ChildcareServices  
+  CarRepair  
+  MedicalTechnology  
+  FinanceAndInvestments  
+  SustainableDevelopment  
+  GamesAndToys  
+}
+

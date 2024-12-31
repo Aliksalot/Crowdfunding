@@ -7,6 +7,7 @@ import { Category, Country } from "../../../shared/enums/Categories";
 import {LogoComponent} from "../logo/logo.component";
 import {EnumToArrayPipe} from "../../pipes/enum-to-array.pipe";
 import { EditorModule } from 'primeng/editor';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create',
@@ -32,6 +33,8 @@ export class CreateComponent{
     cover: undefined,
     text: undefined,
   }
+
+  constructor(private http: HttpClient){}
 
   handleCoverUpload(event: Event): void{
     const input = event.target as HTMLInputElement;
@@ -77,5 +80,16 @@ export class CreateComponent{
   }
   _continue(){
     this.isContinued = true;
+  }
+
+  submit(){
+    this.http.post('/api/offer/new', this.model).subscribe({
+      next: (response) => {
+        console.log(response);
+      },
+      error: (err: Error) => {
+        console.log(err);
+      }
+    })
   }
 }
