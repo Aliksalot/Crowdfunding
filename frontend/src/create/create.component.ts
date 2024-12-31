@@ -8,6 +8,7 @@ import {LogoComponent} from "../logo/logo.component";
 import {EnumToArrayPipe} from "../../pipes/enum-to-array.pipe";
 import { EditorModule } from 'primeng/editor';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-create',
@@ -34,7 +35,7 @@ export class CreateComponent{
     text: undefined,
   }
 
-  constructor(private http: HttpClient){}
+  constructor(private http: HttpClient, private router: Router){}
 
   handleCoverUpload(event: Event): void{
     const input = event.target as HTMLInputElement;
@@ -86,6 +87,7 @@ export class CreateComponent{
     this.http.post('/api/offer/new', this.model).subscribe({
       next: (response) => {
         console.log(response);
+        this.router.navigate(['/account']);
       },
       error: (err: Error) => {
         console.log(err);

@@ -18,7 +18,7 @@ userRouter.get('/', authenticateJWT, async(req: Request, res: Response) => {
 
   const user = await prisma.user.findFirst({ where: { id: (req.session as any).userId.userId }});
   
-  res.status(200).send({ email: user?.email });
+  res.status(200).send([user?.email, user?.id]);
 
 })
 
@@ -86,7 +86,7 @@ userRouter.post('/login', async (req: Request, res: Response) => {
   console.log('logged in');
 
   res.clearCookie('authToken', cookieOptions);
-  res.status(200).cookie('authToken', authToken, cookieOptions).json(user.email);
+  res.status(200).cookie('authToken', authToken, cookieOptions).json([user.email, user.id]);
 })
 
 userRouter.post('/register', async (req: Request, res: Response) => {

@@ -1,0 +1,65 @@
+<div *ngIf="showDeletePopupForId !== undefined"class='delete-popup-overlay'>
+  <div>
+    <p class='maintext'>Сигурен ли сте, че искате да изтриете тази оферта за винаги?</p>
+    <p class='subtext'>Завинаги е много дълго време...</p>
+    <ul>
+      <button class='no' (click)="showDeletePopupForId=undefined">Не</button>
+      <button class='yes' (click)="delete(showDeletePopupForId)">Да</button>
+    </ul>
+  </div>
+</div>
+
+<header class='default-header'>
+  <logo />
+</header>
+<main>
+  <section>
+    <h1>
+      Мойте оферти
+    </h1>
+    <ul *ngIf="usersOffers.length > 0">
+      <li *ngFor="let offer of usersOffers" class='item'>
+        <h1>
+          {{ offer.title }}
+        </h1>
+        <div class='cover'>
+          <img src={{offer.cover}}/>
+        </div>
+        <div class='data'>
+          <div class='data-item'>
+            Категория
+            {{ Categories[offer.category] }}
+          </div>
+          <div class='data-item'>
+            Локация
+            {{ Countries[offer.location] }}
+          </div>
+          <div class='data-item'>
+            Цел
+            {{ offer.goal }}лв
+          </div>
+          <div class='data-item'>
+            Събрани
+            {{ offer.raised }}лв
+          </div>
+          <div *ngIf='offer.approved' class='data-item green'>
+            одобрено
+          </div>
+          <div *ngIf='!offer.approved' class='data-item red'>
+            чака одобрение
+          </div>
+        </div>
+        <div class='action-buttons'>
+          <button class='del' (click)="showDeletePopup(offer.id)"></button>
+          <button class='edit'></button>
+        </div>
+      </li>
+
+    </ul>
+
+    <p class='no-offers' *ngIf="usersOffers.length <= 0">Вие нямате създадени оферти!</p>
+    <a class='no-offers' *ngIf="usersOffers.length <= 0" href="/initialize">
+      Създай
+    </a>
+  </section>
+</main>

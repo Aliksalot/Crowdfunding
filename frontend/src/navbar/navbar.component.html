@@ -6,7 +6,9 @@
     </div>
     <div class='nav-buttons'>
       <button class='start-btn' routerLink='/initialize'>Създай оферта</button>
-      <button class='login-btn' routerLink='/login'>Вход</button>
+
+      <button *ngIf="!isLoggedIn" class='login-btn' routerLink='/login'>Вход</button>
+      <button *ngIf="isLoggedIn" class='login-btn' routerLink='/account'>Моят профил</button>
     </div>
   </nav>
   <div class='results-container'>

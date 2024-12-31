@@ -1,0 +1,165 @@
+.delete-popup-overlay{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 999;
+}
+.delete-popup-overlay > div{
+  background-color: white;
+  padding: 2rem;
+  margin: auto;
+  border-radius: 1rem;
+}
+.delete-popup-overlay .maintext{
+  margin-bottom: 0;
+  font-size: 1.1rem;
+}
+.delete-popup-overlay .subtext{
+  text-align: center;
+  font-size: .9rem;
+  color: darkgray;
+}
+.delete-popup-overlay > div > ul{
+  display: flex;
+  width: 100%;
+  justify-content: space-evenly;
+  padding: 0;
+}
+.delete-popup-overlay > div > ul > button{
+  outline: none;
+  border-radius: .5rem;
+  border: 1px solid black;
+  background-color: transparent;
+  font-size: 1.5rem;
+  padding: .2rem 1rem;
+  cursor: pointer;
+
+  transition: all .1s ease;
+}
+.delete-popup-overlay > div > ul > button:hover{
+  transform: translate(3px, -3px);
+  box-shadow: -3px 3px 3px rgba(0, 0, 0, .2);
+}
+.delete-popup-overlay > div > ul > button:active{
+  transform: translate(0, 0);
+  box-shadow: none;
+}
+.delete-popup-overlay .yes{
+
+}
+header{
+  display:grid;
+  place-items: center;
+}
+::ng-deep logo img{
+  max-width: 100vw;
+}
+.red{ color: red }
+.green{ color: green }
+main{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+main > section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--content-width);
+}
+main > section > h1{
+  text-align: center;
+  font-size: 2.5rem;
+}
+
+main ul{
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+  padding: 0;
+  max-width: 800px;
+  width: 98%;
+  margin: 0 auto;
+  gap: 2rem;
+}
+.item{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px double black;
+  border-radius: 1rem;
+  padding: 1rem;
+}
+.item > h1{
+  grid-column: span 2;
+  margin: 0;
+  text-align: center;
+}
+.cover{
+  display: grid;
+  place-items: center;
+}
+.cover > img{
+ max-height: 150px;
+ max-width: 100%
+}
+.data{
+  margin: 1rem;
+}
+.action-buttons{
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.action-buttons > button{
+  background-color: transparent;
+  width: 30px;
+  height: 30px;
+  outline: none;
+  border: none;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  transition: scale .2s ease;
+
+  cursor: pointer;
+}
+.action-buttons > button:hover{
+  scale: 1.1;
+}
+.action-buttons > button:active{
+  scale: 1.03;
+}
+.del{
+  background-image: url('/assets/images/delete.png')
+}
+.edit{
+  background-image: url('/assets/images/edit.png')
+}
+
+@media (max-width: 650px){
+  .item{
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.no-offers{
+  font-size: 2rem;
+  margin: auto;
+}
+p.no-offers{
+  font-size: 1.7rem;
+}
+a.no-offers{
+  padding-top: 1rem;
+}
