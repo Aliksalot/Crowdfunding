@@ -38,7 +38,31 @@
       
     </section>
 
-    <section class='step-two'>
+    <section *ngIf="isContinued" class='step-two' (input)='onStepTwoInput()'>
+
+      <section class='select title'>
+        <h3>Въведете заглавие на офертата ви.</h3>
+        <input type='text' placeholder='Заглавие' [(ngModel)]="model.title"/>
+      </section>
+
+      <section class='select cover'>
+        <h3>Прикачете корична снимка, която да описва дейността ви.</h3>
+        <h4></h4>
+        <input type='file' placeholder='Заглавие' (change)='handleCoverUpload($event)' accept=".jpg, .jpeg, .png, .gif, .webm"/>
+        <div #coverPreview class='preview'>
+          <img src={{model.cover}} />
+        </div>
+      </section>
+
+      <section class='select content'>
+        <h3>Опишете офертата си. Може да вмъквате снимки, линкове, заглавия, подзаглавия списъци и други.<br/> С този текст целите да спечелите бъдещите си инвеститори.</h3>
+        <p-editor [(ngModel)]="model.text" [style]="{ height: '320px' }" />
+      </section>
+
+      <div class='action-buttons'>
+        <button class='back' (click)='goBack()'>Назад</button>
+        <button class='continue'[ngClass]="{'active': isCreateAllowed}">Създай оферта</button>
+      </div>
     </section>
 
   </section>

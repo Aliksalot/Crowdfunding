@@ -2,15 +2,14 @@ import {Component} from "@angular/core";
 import {RouterModule} from "@angular/router";
 
 @Component({
-  selector: 'logo',
-  standalone: true,
-  imports: [RouterModule],
-  template: `
+    selector: 'logo',
+    imports: [RouterModule],
+    template: `
     <a routerLink='/'>
       <img src='../assets/images/logo.png' class='logo-img'/>
     </a>
   `,
-  styles: `
+    styles: `
     a{
       cursor: pointer
     }

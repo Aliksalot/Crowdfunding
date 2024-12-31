@@ -1,18 +1,16 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { RouterOutlet } from '@angular/router';
 import { Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserStatus } from '../../../shared/enums/api';
 import { Register } from './register';
 import {LogoComponent} from '../logo/logo.component';
 
 @Component({
-  selector: 'app-register',
-  standalone: true,
-  imports: [RouterOutlet, FormsModule, CommonModule, ReactiveFormsModule, LogoComponent],
-  templateUrl: './register.component.html',
-  styleUrl: './register.component.css'
+    selector: 'app-register',
+    imports: [FormsModule, CommonModule, ReactiveFormsModule, LogoComponent],
+    templateUrl: './register.component.html',
+    styleUrl: './register.component.css'
 })
 
 export class RegisterComponent {

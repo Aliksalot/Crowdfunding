@@ -5,5 +5,7 @@ export class CreateModel{
   title: string | undefined;
   location: Country | undefined;
   money: number | undefined;
+  cover: string | undefined;
+  text: string | undefined;
 
 }

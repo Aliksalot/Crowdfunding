@@ -53,7 +53,7 @@ main > section{
   margin-top: 0;
   color: darkgray;
 }
-.price > input{
+.price > input, .title > input{
   width: 95vw;
   max-width: 400px;
   font-size: min(1.3rem, max(1.3vw, 1.1rem));
@@ -73,7 +73,7 @@ main > section{
   display: grid;
   place-items: center;
 }
-.continue-button-cnt > button{
+.continue-button-cnt > button, .continue, .back {
   font-size: 1.5rem;
   padding: .5rem 2rem;
   border-radius: 1rem;
@@ -82,10 +82,21 @@ main > section{
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
   color: darkgray;
 }
-.continue-button-cnt > button.active{
+.continue-button-cnt > button.active, .continue.active, .back{
   cursor: pointer;
   color: black;
 }
-.continue-button-cnt > button.active:hover{
+.continue-button-cnt > button.active:hover, .continue.active:hover, .back:hover{
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
 }
+
+.step-two{
+}
+
+.step-two > .action-buttons{
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
