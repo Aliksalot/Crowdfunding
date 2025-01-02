@@ -14,7 +14,10 @@ offerRouter.get('/', authenticateJWT, async (req, res) => {
 });
 
 offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
+
   const where_filter = req.body || {};
+
+  console.log(typeof where_filter.id);
 
   try{
     const offer = await prisma.offer.findFirst({ where: where_filter });
@@ -22,6 +25,7 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
     return;
   }catch{
     console.log('err');
+    res.json({});
   }
 
   res.status(201);
@@ -87,6 +91,24 @@ offerRouter.post('/new', authenticateJWT, async (req, res) => {
   }
   
   res.status(200).json({});
+})
+
+offerRouter.post('/:id', authenticateJWT, async(req: Request, res: Response) => {
+
+  const id = req.params.id;
+
+  const newOffer = req.body;
+
+  if(!id){ res.sendStatus(400); return; }
+
+  try{
+    const result = await prisma.offer.update({ where: { id: parseInt(id) }, data: newOffer });
+
+    console.log(result);
+    res.json({});
+  }catch{
+    res.json({});
+  }
 })
 
 export default offerRouter;

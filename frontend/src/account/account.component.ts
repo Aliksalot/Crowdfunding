@@ -3,7 +3,7 @@ import {  Offer } from '@prisma/client';
 import { Category, Country } from '../../../shared/enums/Categories';
 import { HttpClient } from '@angular/common/http';
 import {Component} from "@angular/core";
-import {RouterModule} from "@angular/router";
+import {RouterModule, Router} from "@angular/router";
 import {AuthService} from "../../services/auth.service";
 import { CommonModule } from "@angular/common";
 
@@ -28,7 +28,7 @@ export class AccountComponent{
 
   usersOffers: Offer[] = [];
 
-  constructor(private authService: AuthService, private http: HttpClient){
+  constructor(private authService: AuthService, private http: HttpClient, private router: Router){
     [this.userEmail, this.userId] = authService.getLoggedInEmail();
 
     this.http.post('/api/offer/findMany', { creator: this.userId }).subscribe({
@@ -58,5 +58,9 @@ export class AccountComponent{
   showDeletePopup(id: number) {
     console.log(id);
     this.showDeletePopupForId = id;
+  }
+
+  navigateToEdit(id: number) {
+    this.router.navigateByUrl(`/edit?id=${id}`);
   }
 }

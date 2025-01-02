@@ -21,3 +21,39 @@ body, body *{
   display: grid;
   box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
 }
+.default-main{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.default-content{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: var(--content-width);
+}
+.default-input{
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+  outline: none;
+  border: none;
+  border-radius: 1rem;
+  background-color: white;
+  padding: .3rem .6rem;
+}
+.default-button:not(.disabled){
+  transition: all .1s ease;
+  cursor: pointer;
+}
+.default-button:not(.disabled):hover{
+  transform: translate(3px, -3px);
+  box-shadow: -3px 3px 18px rgba(0, 0, 0, .2);
+}
+.default-button:not(.disabled):active{
+  transform: translate(0, 0);
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+}
+.default-button.disabled{
+  color: gray;
+}
+
+

@@ -1,0 +1,57 @@
+::ng-deep logo img{
+  max-width: 100vw;
+}
+header{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+header > div{
+  display: grid;
+  place-items: center;
+}
+logo{
+  grid-column: 2;
+}
+
+.data{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+.data .item{
+  display: flex;
+  font-size: 1.3rem;
+  margin: .5rem;
+  flex-direction: column;
+}
+.data .item > input, .data .item > select{
+  font-size: 1.1rem;
+}
+.data .item > select{
+  cursor: pointer;
+}
+.data .item-save{
+  display: flex;
+  align-items: flex-end;
+}
+.data .item-save button{
+  font-size: 1.3rem;
+  padding: .4rem .8rem;
+}
+.data-inner{
+  margin: auto;
+}
+@media (max-width: 755px){
+  header{
+    display: flex;
+    flex-direction: column;
+  }
+  logo{
+    width: min-content;
+    margin: auto;
+  }
+  header > div > a{
+    margin: 0 2rem 1rem auto;
+  }
+}

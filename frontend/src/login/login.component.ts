@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserStatus } from '../../../shared/enums/api';
+import { Router } from '@angular/router';
 import {LogoComponent} from '../logo/logo.component';
 import {AuthService} from '../../services/auth.service';
 
@@ -22,7 +23,7 @@ export class LoginComponent {
 
   isEmailTaken = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router) {
 
     this.form = fb.group({
       pass: [
@@ -46,7 +47,11 @@ export class LoginComponent {
     this.isSubmited = true;
     const email = this.form.get('email'), pass = this.form.get('pass');
     if(email?.valid && pass?.valid){
-      this.authService.login(email.value, pass.value);
+      this.authService.login(email.value, pass.value).subscribe({
+        next: () => {
+          this.router.navigate(['/account']);
+        }
+      });
     }
   }
 
