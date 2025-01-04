@@ -3,7 +3,9 @@
   --text-active: navy;
   --content-width: 1400px;
 }
-
+body.no-scroll{
+  overflow: hidden;
+}
 @font-face{
   font-family: 'font';
   src: url('assets/fonts/Audex.ttf') format('truetype'),

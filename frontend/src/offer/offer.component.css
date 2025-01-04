@@ -15,10 +15,34 @@ header{
   width: 100%;
 }
 .cover-and-donations > div{
-  background-color: blue;
   min-width: 320px;
   width: 50%;
   margin: auto;
+}
+.fund{
+  display: flex;
+  flex-direction: column;
+}
+.goal-line{
+  width: 100%;
+  height: 10px;
+  border-radius: 6px;
+  background-color: lightgray;
+  overflow: hidden;
+
+  margin-bottom: .5rem;
+}
+.achieved-line{
+  width: 50%;
+  height: 10px;
+  border-radius: 6px;
+  background-color: var(--text-active);
+}
+.main-text{
+  font-size: 2rem;
+}
+.sub-text {
+  margin-bottom: 2rem;
 }
 .cover{
   display: flex;
@@ -58,3 +82,69 @@ header{
   display: flex;
 }
 
+.animate {
+  animation: loadAnimation 1s ease-in-out;
+}
+@keyframes loadAnimation{
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+.fund-button{
+  font-size: 1.5rem;
+  width: min-content;
+  margin: 0 auto;
+  padding: .6rem 2rem;
+}
+
+
+.fund-popup-overlay{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background-color: rgba(0, 0, 0, .5);
+  overflow: hidden;
+  z-index: 9999;
+
+}
+
+.fund-popup-overlay > section{
+  background-color: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 1rem;
+}
+
+.fund-popup-overlay h1{
+  font-size: 1.5rem;
+  text-align: center;
+}
+.fund-popup-overlay h2{
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.fund-popup-overlay > section > input{
+  font-size: 1.5rem;
+}
+.fund-popup-overlay > section > div {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.fund-popup-overlay > section > div > button{
+  font-size: 1.5rem;
+  width: min-content;
+  text-wrap: nowrap;
+  margin: .5rem auto 0;
+}

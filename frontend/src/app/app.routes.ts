@@ -9,6 +9,7 @@ import { EditComponent } from '../edit/edit.component';
 
 import {AuthGuard} from '../../auth.guard';
 import {OfferComponent} from '../offer/offer.component';
+import {PaymentComponent} from '../payment/payment.module';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -19,4 +20,5 @@ export const routes: Routes = [
   { path: 'initialize', component: CreateComponent, canActivate: [AuthGuard] },
   { path: 'account', component: AccountComponent , canActivate: [AuthGuard] },
   { path: 'edit', component: EditComponent, canActivate: [AuthGuard] },
+  { path: 'payment', component: PaymentComponent, canActivate: [AuthGuard] },
 ];

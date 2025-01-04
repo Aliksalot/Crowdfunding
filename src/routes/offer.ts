@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { CommentWithRelations, OfferWithRelations } from '../../shared/types/extended-models';
 import {authenticateJWT, createJWT, hashPassword, verifyPassword} from '../utils/auth';
+import {PaymentStatus} from '../../shared/enums/api';
 
 const offerRouter = Router();
 
@@ -38,7 +39,7 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
     }
 
     console.log(offer.comments);
-    for(const comment of offer?.comments){
+    for(const comment of offer.comments){
       if(comment.replyToId){
         const parentComment = offer.comments.find((_comment) => _comment.id === comment.replyToId ) as CommentWithRelations;
         if(parentComment.replies === undefined){
@@ -156,7 +157,33 @@ offerRouter.put('/comment', authenticateJWT, async(req: Request, res: Response) 
     console.log(err);
   }
   res.json({});
-})
+});
+
+offerRouter.put('/fund', authenticateJWT, async(req: Request, res: Response) => {
+  try{
+    const { offerId, value } = req.body;
+
+    const userId = (req.session as any ).userId.userId;
+
+    await prisma.fund.create({ data: {
+      offerId, amount: value, userId
+    }});
+    await prisma.offer.update({
+      where: {
+        id: offerId
+      },
+      data: {
+        raised: {
+          increment: value
+        }
+      }
+    });
+
+    res.json({ status: PaymentStatus.SUCCESS });
+  }catch{
+    res.json({ status: PaymentStatus.FAIL });
+  }
+});
 
 export default offerRouter;
 

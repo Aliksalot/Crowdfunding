@@ -1,46 +1,91 @@
+<div class='fund-popup-overlay' *ngIf="shouldShowPaymentPopup">
+  <section>
+    <h1>Допринасяне на средства към "{{ getOffer()?.title }}"</h1>
+    <h2>Колко пари искате да допринесете? </h2>
+    <input class='default-input' placeholder="сума" [(ngModel)]="valueToPay"/>
+    {{valueToPay}}
+    <div>
+      <button class='default-input default-button' (click)="setShouldShowPaymentPopup(false)">
+        Отмяна
+      </button>
+      <button class='default-input default-button' (click)="goToPayment()">
+        Към плащане
+      </button>
+    </div>
+  </section>
+</div>
 <header class='default-header'>
   <logo />
 </header>
 <main class='default-main'>
-  <section *ngIf="!!offer" class='default-content'>
+  <section *ngIf="!!getOffer()" class='default-content'>
     <h1>
-      {{ offer.title }}
+      {{ getOffer()?.title }}
     </h1>
     <div class="cover-and-donations">
       <div class="cover">
-        <img src="{{ offer.cover }}" />
+        <img src="{{ getOffer()?.cover }}" />
       </div>
-      <div>
+      <div class="fund">
+        <div class="goal-line" #goalLine>
+          <div class="achieved-line" #achievedLine></div>
+        </div>
+        <span class='main-text'>
+          {{ getOffer()?.raised }}лв
+        </span>
+        <span class='sub-text'>
+          {{ 'събрани, като цел е ' + getOffer()?.goal + ' лв' }}
+        </span>
+
+        <span class='main-text'>
+
+          {{ (getOffer()?.funds || []).length }}
+        </span>
+        <span class='sub-text'>
+          {{ 'човека са допринесли' }}
+        </span>
+
+        <span class='main-text'>
+          {{ daysSinceOfferCreation }}
+        </span>
+        <span class='sub-text'>
+          {{ 'дни от създаването' }}
+        </span>
+
+        <button class='fund-button default-input default-button' (click)="setShouldShowPaymentPopup(true)">
+          ДОПРИНЕСИ
+        </button>
+        
       </div>
     </div>
 
     <div class='data'>
       <div class='item'>
         <span>Категория</span>
-        <span>{{ categories[offer.category] }}</span>
+        <span>{{ categories[getOffer()?.category || "Art"] }}</span>
       </div>
       <div class='item'>
         <span>Цел</span>
-        <span>{{ offer.goal }}лв</span>
+        <span>{{ getOffer()?.goal }}лв</span>
       </div>
       <div class='item'>
         <span>Локация</span>
-        <span>{{ locations[offer.location] }}</span>
+        <span>{{ locations[getOffer()?.location || "Bulgaria"] }}</span>
       </div>
     </div>
     
     <div class='text-content'>
-      <div class='offer-inner-text-content' [innerHTML]="offer.text"></div>
+      <div class='offer-inner-text-content' [innerHTML]="getOffer()?.text"></div>
       <section class='comments'>
         <h1>Коментари</h1>
         <div class='comment'>
           <comment-input 
             [replyToId]="null"
-            [offerId]="offer.id"
+            [offerId]="getOffer()?.id || 0"
             [placeholder]="'Коментирайте по офертата, задайте въпрос...'"
           />
         </div>
-        <comment-list [comments]="offer.comments" />
+        <comment-list [comments]="getOffer()?.comments" />
       </section>
     </div>
 
