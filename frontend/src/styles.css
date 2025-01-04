@@ -55,5 +55,12 @@ body, body *{
 .default-button.disabled{
   color: gray;
 }
-
-
+.offer-inner-text-content *{
+  display: block;
+  white-space: normal;
+  max-width: min(800px, 90vw);
+  font-size: min(1.2rem, max(1rem, 1.2vw));
+  text-wrap: wrap;
+  word-wrap: break-word;
+  text-align: justify;
+}

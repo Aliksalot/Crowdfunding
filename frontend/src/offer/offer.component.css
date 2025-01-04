@@ -1,0 +1,49 @@
+header{
+  display: grid;
+  place-items: center;
+}
+::ng-deep logo img{
+  max-width: 98vw;
+}
+
+.default-content > h1{
+  text-align: center;
+}
+.cover-and-donations{
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+}
+.cover-and-donations > div{
+  background-color: blue;
+  min-width: 320px;
+  width: 50%;
+  margin: auto;
+}
+.cover{
+  display: flex;
+  justify-content: center;
+}
+.cover > img {
+  width: 100%;
+}
+.data{
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+.data .item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.text-content{
+  max-width: 800px;
+  margin: 0 auto;
+  text-wrap: wrap;
+}
+.text-content *{
+  text-wrap: wrap;
+  max-width: 800px;
+  display: block;
+}

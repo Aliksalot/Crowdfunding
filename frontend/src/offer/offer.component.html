@@ -1,0 +1,38 @@
+<header class='default-header'>
+  <logo />
+</header>
+<main class='default-main'>
+  <section *ngIf="!!offer" class='default-content'>
+    <h1>
+      {{ offer.title }}
+    </h1>
+    <div class="cover-and-donations">
+      <div class="cover">
+        <img src="{{ offer.cover }}" />
+      </div>
+      <div>
+      </div>
+    </div>
+
+    <div class='data'>
+      <div class='item'>
+        <span>Категория</span>
+        <span>{{ categories[offer.category] }}</span>
+      </div>
+      <div class='item'>
+        <span>Цел</span>
+        <span>{{ offer.goal }}лв</span>
+      </div>
+      <div class='item'>
+        <span>Локация</span>
+        <span>{{ locations[offer.location] }}</span>
+      </div>
+    </div>
+    
+    <div class='text-content'>
+      <div class='offer-inner-text-content' [innerHTML]="offer.text"></div>
+    </div>
+
+
+  </section>
+</main>

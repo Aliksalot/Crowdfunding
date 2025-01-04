@@ -38,8 +38,10 @@ export class EditComponent {
       this.http.put('/api/offer/findOne', { id: this.offerId }).subscribe({
         next: (offer) => {
           console.log(offer);
-          if(offer)
+          if(offer){
             this.offer = offer as Offer;
+            this.areChanges = false;
+          }
         },
         error: (e) => {
           console.log(e);

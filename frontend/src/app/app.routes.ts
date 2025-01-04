@@ -8,12 +8,15 @@ import { AccountComponent } from '../account/account.component';
 import { EditComponent } from '../edit/edit.component';
 
 import {AuthGuard} from '../../auth.guard';
+import {OfferComponent} from '../offer/offer.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent },
+  { path: 'offer/:id', component: OfferComponent },
+
   { path: 'initialize', component: CreateComponent, canActivate: [AuthGuard] },
   { path: 'account', component: AccountComponent , canActivate: [AuthGuard] },
-  { path: 'edit', component: EditComponent, canActivate: [AuthGuard] }
+  { path: 'edit', component: EditComponent, canActivate: [AuthGuard] },
 ];
