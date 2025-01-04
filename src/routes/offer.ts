@@ -25,6 +25,7 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
       where: where_filter,
       include: {
         user: true,
+        funds: true,
         comments: {
           include: {
             user: true,

@@ -3,7 +3,6 @@
     <h1>Допринасяне на средства към "{{ getOffer()?.title }}"</h1>
     <h2>Колко пари искате да допринесете? </h2>
     <input class='default-input' placeholder="сума" [(ngModel)]="valueToPay"/>
-    {{valueToPay}}
     <div>
       <button class='default-input default-button' (click)="setShouldShowPaymentPopup(false)">
         Отмяна

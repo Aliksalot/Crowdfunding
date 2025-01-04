@@ -12,16 +12,18 @@ header{
 .cover-and-donations{
   display: flex;
   flex-wrap: wrap;
+  gap: 1rem;
   width: 100%;
 }
 .cover-and-donations > div{
   min-width: 320px;
-  width: 50%;
+  width: 46%;
   margin: auto;
 }
 .fund{
   display: flex;
   flex-direction: column;
+  margin-top: 1rem;
 }
 .goal-line{
   width: 100%;
