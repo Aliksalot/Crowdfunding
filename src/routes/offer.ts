@@ -1,7 +1,7 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { CommentWithRelations, OfferWithRelations } from '../../shared/types/extended-models';
 import {authenticateJWT, createJWT, hashPassword, verifyPassword} from '../utils/auth';
-import { UserStatus } from '../../shared/enums/api';
 
 const offerRouter = Router();
 
@@ -20,11 +20,40 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
   console.log(typeof where_filter.id);
 
   try{
-    const offer = await prisma.offer.findFirst({ where: where_filter });
+    const offer = (await prisma.offer.findUnique({
+      where: where_filter,
+      include: {
+        user: true,
+        comments: {
+          include: {
+            user: true,
+          }
+        },
+      }
+    })) as unknown as OfferWithRelations;
+
+    if(!offer){ 
+      res.json({})
+      return;
+    }
+
+    console.log(offer.comments);
+    for(const comment of offer?.comments){
+      if(comment.replyToId){
+        const parentComment = offer.comments.find((_comment) => _comment.id === comment.replyToId ) as CommentWithRelations;
+        if(parentComment.replies === undefined){
+          parentComment.replies = [];
+        }
+        parentComment.replies.push(comment);
+      }
+    }
+    
+    offer.comments = offer.comments.filter((_comment) => !_comment.replyToId );
+    
     res.json(offer);
     return;
-  }catch{
-    console.log('err');
+  }catch(err){
+    console.log(err);
     res.json({});
   }
 
@@ -40,6 +69,7 @@ offerRouter.post('/findMany', authenticateJWT, async (req, res) => {
   }catch(err){
     console.log('err');
     console.log(err);
+
   }
 
   res.status(201);
@@ -109,6 +139,23 @@ offerRouter.post('/:id', authenticateJWT, async(req: Request, res: Response) => 
   }catch{
     res.json({});
   }
+})
+
+offerRouter.put('/comment', authenticateJWT, async(req: Request, res: Response) => {
+  //text, replyto
+  
+  try{
+    const { text, replyTo, offerId } = req.body;
+    const userId = (req.session as any ).userId.userId;
+
+    await prisma.comment.create({ data: {
+      text, offerId, userId,
+      replyToId: replyTo || null,
+    }})
+  }catch (err){
+    console.log(err);
+  }
+  res.json({});
 })
 
 export default offerRouter;

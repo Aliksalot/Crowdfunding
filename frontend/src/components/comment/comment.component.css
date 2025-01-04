@@ -1,0 +1,33 @@
+.comment-container{
+  display: flex;
+  flex-direction: column;
+}
+.comment{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+
+  background-color: white;
+  box-shadow: 0 0 15px rgba(0, 0, 0, .2);
+  padding: 1rem;
+  border-radius: 1rem;
+  margin-bottom: .5rem;
+}
+.header{
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.header span{
+  text-wrap: nowrap;
+}
+.reply{
+  padding-left: 5%;
+  flex-grow: 1;
+  border-left: 1px solid lightgray;
+}
+.comment-button{
+  width: min-content;
+  margin-left: auto;
+}
+

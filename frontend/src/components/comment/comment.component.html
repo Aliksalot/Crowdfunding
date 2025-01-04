@@ -1,0 +1,32 @@
+<div class='comment-container'>
+  <div class='comment'>
+
+    <div class='header'>
+      <span>
+        {{ comment.user.email }}
+      </span>
+      <span>
+        {{ comment.createdAt | date: 'на ' + 'dd.MM' + ' в ' + 'HH:mm' }}
+      </span>
+    </div>
+    <p class='text'>
+      {{ comment.text }}
+    </p>
+    
+    <button class='comment-button default-button default-input' *ngIf="!showCommentInput" (click)="showCommentInput = true">
+      Отговор
+    </button>
+
+  </div>
+  <div class='reply-input' *ngIf="showCommentInput">
+    <comment-input
+       [replyToId]="comment.id"
+       [offerId]="comment.offerId"
+       [placeholder]="'Вашият отговор'"
+    ></comment-input>
+  </div>
+  <div class='reply' *ngIf="comment.replies && comment.replies.length > 0">
+    <comment *ngFor="let comment of comment.replies" [comment]="comment"
+    ></comment>
+  </div>
+</div>

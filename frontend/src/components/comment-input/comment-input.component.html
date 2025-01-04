@@ -1,0 +1,11 @@
+
+<div class='comment-input'>
+  <input 
+    class='default-input'
+    placeholder="{{ placeholder }}"
+    [(ngModel)]="text"
+  />
+  <button class='submit default-input default-button' [ngClass]="{'disabled': !text}" (click)="text && submit()">
+    Коментирай
+  </button>
+</div>

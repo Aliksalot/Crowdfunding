@@ -40,6 +40,9 @@ body, body *{
   background-color: white;
   padding: .3rem .6rem;
 }
+.default-input:hover::placeholder, .default-input:focus::placeholder{
+  color: var(--text-active);
+}
 .default-button:not(.disabled){
   transition: all .1s ease;
   cursor: pointer;

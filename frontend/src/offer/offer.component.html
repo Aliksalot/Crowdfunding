@@ -31,8 +31,18 @@
     
     <div class='text-content'>
       <div class='offer-inner-text-content' [innerHTML]="offer.text"></div>
+      <section class='comments'>
+        <h1>Коментари</h1>
+        <div class='comment'>
+          <comment-input 
+            [replyToId]="null"
+            [offerId]="offer.id"
+            [placeholder]="'Коментирайте по офертата, задайте въпрос...'"
+          />
+        </div>
+        <comment-list [comments]="offer.comments" />
+      </section>
     </div>
-
 
   </section>
 </main>

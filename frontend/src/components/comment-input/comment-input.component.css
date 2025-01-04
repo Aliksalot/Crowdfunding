@@ -1,0 +1,14 @@
+.comment-input{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+input{
+  font-size: 1.2rem;
+  flex-grow: 1;
+}
+.submit{
+  width: min-content;
+  font-size: 1.2rem;
+  margin: .5rem 0 .5rem auto;
+}

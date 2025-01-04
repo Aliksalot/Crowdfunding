@@ -1,7 +1,9 @@
 import { Component, ElementRef, ViewChild } from "@angular/core";
 import { LogoComponent } from "../logo/logo.component";
 import {ActivatedRoute} from "@angular/router";
-import {Offer} from "@prisma/client";
+import { OfferWithRelations, CommentWithRelations } from '../../../shared/types/extended-models';
+import { CommentInputComponent } from "../components/comment-input/comment-input.component";
+import { CommentListComponent } from "../components/comment-list/comment-list.component";
 import { Category, Country } from "../../../shared/enums/Categories";
 import {CommonModule} from "@angular/common";
 import {FormsModule} from "@angular/forms";
@@ -9,7 +11,7 @@ import {HttpClient} from "@angular/common/http";
 
 @Component({
   standalone: true,
-  imports: [ LogoComponent, CommonModule ],
+  imports: [ LogoComponent, CommonModule, CommentInputComponent, CommentListComponent ],
   templateUrl: './offer.component.html',
   styleUrl: './offer.component.css',
 })
@@ -19,7 +21,7 @@ export class OfferComponent{
   locations = Country;
 
   offerId: number | undefined;
-  offer: Offer | undefined;
+  offer: OfferWithRelations | undefined;
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {};
 
@@ -29,15 +31,9 @@ export class OfferComponent{
       this.http.put('/api/offer/findOne', { id: this.offerId }).subscribe({
         next: (offer) => {
           console.log(offer);
-          if(offer){
-            (offer as Offer).text = `${(offer as Offer).text}
-              <style>
-                .inner-content p{
-                  text-wrap: wrap;
-                }
-              </style>
-            `;
-            this.offer = offer as Offer;
+          if(offer !== undefined){
+
+            this.offer = offer as OfferWithRelations;
           }
         },
         error: (e) => {
