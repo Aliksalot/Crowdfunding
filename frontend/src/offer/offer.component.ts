@@ -32,6 +32,7 @@ export class OfferComponent {
 
   shouldShowPaymentPopup: boolean = false;
   valueToPay: number | undefined;
+  uniqueFundersCount: number | undefined;
 
   setShouldShowPaymentPopup(new_state: boolean): void{
     this.shouldShowPaymentPopup = new_state;
@@ -64,6 +65,14 @@ export class OfferComponent {
   setOffer(offer: OfferWithRelations){
     this.offer = offer;
     this.isOfferDefined = true;
+
+    const uniqueFunderIds: number[] = [];
+    for(const fund of offer.funds){
+      if(!uniqueFunderIds.includes(fund.userId)){
+        uniqueFunderIds.push(fund.userId);
+      }
+    }
+    this.uniqueFundersCount = uniqueFunderIds.length;
 
     window.setTimeout(() => {
       this.resizeLine();
