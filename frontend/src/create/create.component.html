@@ -8,7 +8,7 @@
     <section class='step-one' *ngIf='!isContinued'>
       
       <section class='select category'>
-        <h3>В коя свера на бита планирате да разработите бизнеса си?</h3>
+        <h3>В коя сфера на бита планирате да разработите бизнеса си?</h3>
         <select [(ngModel)]="model.category"(input)='onStepOneInput()'>
           <option *ngFor="let category of categories | enumToArray" [value]="category.key">
           {{ category.val }}
@@ -17,7 +17,7 @@
       </section>
 
       <section class='select location' (input)='onStepOneInput()'>
-        <h3>Къде ще разпожите бизнеса си?</h3>
+        <h3>Къде ще разполжите бизнеса си?</h3>
         <select [(ngModel)]="model.location">
           <option *ngFor="let country of countries | enumToArray" [value]="country.key">
           {{ country.val }}

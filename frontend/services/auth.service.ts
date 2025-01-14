@@ -46,7 +46,10 @@ export class AuthService{
 
   logout(){
     this.loggedInEmail = '';
+    sessionStorage.removeItem('e');
+    sessionStorage.removeItem('e_id');
     this.http.get('/logout');
+    this.router.navigate(['/']);
   }
 
   getLoggedInEmail(): [string, number]{

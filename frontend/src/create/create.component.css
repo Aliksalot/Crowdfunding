@@ -100,3 +100,9 @@ main > section{
   flex-wrap: wrap;
 }
 
+.preview{
+  max-width: 800px;
+}
+.preview > img{
+  max-width: inherit;
+}

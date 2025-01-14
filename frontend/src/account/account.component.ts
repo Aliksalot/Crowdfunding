@@ -63,4 +63,8 @@ export class AccountComponent{
   navigateToEdit(id: number) {
     this.router.navigateByUrl(`/edit?id=${id}`);
   }
+
+  logout() {
+    this.authService.logout();
+  }
 }

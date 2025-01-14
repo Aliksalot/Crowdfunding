@@ -1,3 +1,14 @@
+header{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+header > a:hover{
+  cursor: pointer;
+  color: var(--text-active);
+}
+header > logo{
+  grid-column: 2;
+}
 .delete-popup-overlay{
   position: fixed;
   width: 100vw;

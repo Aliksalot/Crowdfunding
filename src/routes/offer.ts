@@ -18,8 +18,6 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
 
   const where_filter = req.body || {};
 
-  console.log(typeof where_filter.id);
-
   try{
     const offer = (await prisma.offer.findUnique({
       where: where_filter,
@@ -39,7 +37,6 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
       return;
     }
 
-    console.log(offer.comments);
     for(const comment of offer.comments){
       if(comment.replyToId){
         const parentComment = offer.comments.find((_comment) => _comment.id === comment.replyToId ) as CommentWithRelations;

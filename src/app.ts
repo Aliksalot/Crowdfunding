@@ -7,6 +7,7 @@ import { authenticateJWT } from './utils/auth';
 //routers
 import userRouter from './routes/user';
 import offerRouter from './routes/offer';
+import {imagesRouter} from './routes/images';
 
 dotenv.config();
 
@@ -28,6 +29,8 @@ app.use(express.json());
 app.use('/user', userRouter);
 
 app.use('/offer', offerRouter);
+
+app.use('/image', imagesRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('test');

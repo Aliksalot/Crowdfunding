@@ -43,6 +43,23 @@ export class CreateComponent{
     if(!input.files || input.files?.length <= 0){ return; }
 
     const file = input.files[0];
+
+    //handle upload
+    const formData = new FormData();
+
+    formData.append('file', file);
+
+    this.http.post('/api/image/upload', formData).subscribe({
+      next: (response) => {
+        console.log(response);
+        this.model.cover = `/api/image/${(response as any).filePath}`;
+      },
+      error: (error) => {
+        console.log(error);
+      }
+    })
+
+    //handle preview
     const reader = new FileReader();
 
     reader.onload = () => {
@@ -58,7 +75,6 @@ export class CreateComponent{
     }
 
     reader.readAsDataURL(file);
-
   }
 
   onStepTwoInput() {
