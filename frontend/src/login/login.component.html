@@ -13,12 +13,23 @@
        formControlName='email'
        (input)='onChange()'
       />
+
+      <div *ngIf="(form.get('email')?.invalid || isLoginInvalid) && isSubmited">
+        <p *ngIf="form.get('email')?.hasError('required')">Това поле е задължително!</p>
+        <p *ngIf="form.get('email')?.hasError('email')">Имейлът е невалиден!</p>
+        <p *ngIf="isLoginInvalid"> Няма парола, съвпадаща с този имейл. </p>
+      </div>
+        
       <input 
        placeholder='Парола'
        type='password'
        formControlName='pass'
        (input)='onChange()'
       />
+      <div *ngIf="(form.get('pass')?.invalid || isLoginInvalid) && isSubmited">
+        <p *ngIf="form.get('pass')?.hasError('required')">Това поле е задължително!</p>
+        <p *ngIf="form.get('pass')?.hasError('minlength')">Минимална дължина на паролата е 6 символа!</p>
+      </div>
       <button>
         Вход
       </button>

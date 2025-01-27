@@ -21,6 +21,8 @@ export class LoginComponent {
 
   isSubmited = false;
 
+  isLoginInvalid = false;
+
   isEmailTaken = false;
 
   constructor(private http: HttpClient, private fb: FormBuilder, private authService: AuthService, private router: Router) {
@@ -48,8 +50,16 @@ export class LoginComponent {
     const email = this.form.get('email'), pass = this.form.get('pass');
     if(email?.valid && pass?.valid){
       this.authService.login(email.value, pass.value).subscribe({
-        next: () => {
+        next: (response) => {
+          console.log(response);
+          if(response){
+
+          }
           this.router.navigate(['/account']);
+        },
+        error: (err) => {
+          console.log(err);
+          this.isLoginInvalid = true;
         }
       });
     }
@@ -58,5 +68,6 @@ export class LoginComponent {
   onChange(){
     this.isSubmited = false;
     this.isEmailTaken = false;
+    this.isLoginInvalid = false;
   }
 }

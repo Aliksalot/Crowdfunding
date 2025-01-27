@@ -56,13 +56,13 @@ userRouter.post('/login', async (req: Request, res: Response) => {
 
   }catch{
     console.log('error with getting user');
-    res.sendStatus(400);
+    res.sendStatus(202);
     return;
   }
 
   if(!user || !user.passwordHash) { 
     console.log('erro wtih getting user');
-    res.sendStatus(400);
+    res.sendStatus(202);
     return;
   }
 
@@ -70,7 +70,7 @@ userRouter.post('/login', async (req: Request, res: Response) => {
   const loginResult = await verifyPassword(user?.passwordHash, passwordAttempt);
 
   if(!loginResult){
-    res.sendStatus(401);
+    res.sendStatus(201);
     return;
   }
   const authToken = createJWT(user.id);
