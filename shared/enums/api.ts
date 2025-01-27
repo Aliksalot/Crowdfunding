@@ -3,6 +3,10 @@ export enum UserStatus{
   EMAIL_TAKEN,
   PASSWORD_INVALID,
 }
+export enum UserRole{
+  ADMIN = 'admin',
+  USER = 'user'
+}
 export enum PaymentStatus {
   AWAITING,
   FAIL,

@@ -86,7 +86,7 @@ userRouter.post('/login', async (req: Request, res: Response) => {
   console.log('logged in');
 
   res.clearCookie('authToken', cookieOptions);
-  res.status(200).cookie('authToken', authToken, cookieOptions).json([user.email, user.id]);
+  res.status(200).cookie('authToken', authToken, cookieOptions).json([user.email, user.id, user.isAdmin]);
 })
 
 userRouter.post('/register', async (req: Request, res: Response) => {
@@ -121,5 +121,18 @@ userRouter.post('/register', async (req: Request, res: Response) => {
   res.status(201).json({ status: UserStatus.CREATED });
 });
 
+userRouter.get("/create-admin", async (req: Request, res: Response) => {
+  try{
+    await prisma.user.create({
+      data: { email: "admin@admin.admin", passwordHash: (await hashPassword("changeit"))!, isAdmin: true }
+    })
+  }catch{
+    res.status(200).json({});
+    return;
+  }
+  res.status(200).json({});
+})
+
 export default userRouter;
+
 

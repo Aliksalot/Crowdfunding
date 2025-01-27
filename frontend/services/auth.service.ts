@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
+import { UserRole } from '../../shared/enums/api';
 import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService{
+  private isAdmin: boolean | undefined | null = undefined;
   private loggedInEmail: string | undefined | null = undefined;
   private loggedInId: string | undefined | null = undefined;
 
@@ -29,10 +31,17 @@ export class AuthService{
       next: (result) => {
         console.log(result);
         if(result){
+          console.log("type: ", typeof((result as any)[2]));
           this.loggedInEmail = (result as [string, string])[0] as string;
           this.loggedInId = (result as [string, string])[1] as string;
+          this.isAdmin = (result as [string, string, boolean][2] as boolean);
           sessionStorage.setItem('e', this.loggedInEmail);
           sessionStorage.setItem('e_id', this.loggedInId as string);
+          if(this.isAdmin){
+            sessionStorage.setItem('e_role', UserRole.ADMIN);
+          }else{
+            sessionStorage.setItem('e_role', UserRole.USER);
+          }
         }else{
           this.router.navigate(['/login']);
         }
@@ -48,6 +57,7 @@ export class AuthService{
     this.loggedInEmail = '';
     sessionStorage.removeItem('e');
     sessionStorage.removeItem('e_id');
+    sessionStorage.removeItem('e_role');
     this.http.get('/logout');
     this.router.navigate(['/']);
   }
@@ -64,6 +74,12 @@ export class AuthService{
     return [this.loggedInEmail || '', parseInt(this.loggedInId || '0') || 0];
   }
 
+  getIsAdmin(): boolean {
+    if(this.isAdmin === undefined){
+      this.isAdmin = sessionStorage.getItem('e_role') === undefined ? null : sessionStorage.getItem('e_role') === UserRole.ADMIN;
+    }
+    return this.isAdmin || false;
+  }
 
 }
 
