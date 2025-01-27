@@ -31,3 +31,9 @@ This below are the requirements in Bulgarian.
 Бележки:
 Готино тек стакче
 Сървъра е в руут, енгулара е в /фронтенд
+
+###TODO
+- [ ] Home page
+- [ ] Admin view
+- [ ] Offer approval
+- [ ] Better? payment system
