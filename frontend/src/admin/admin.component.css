@@ -1,0 +1,75 @@
+::ng-deep logo img{
+  max-width: 98vw;
+}
+header{
+  display: grid;
+  place-items: center;
+}
+.default-content{
+}
+.offers-list{
+  list-style-type: none;
+  padding: 0;
+  margin: 1rem auto;
+  max-width: 800px;
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.item{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 2px double black;
+  border-radius: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  border: 1px solid darkgray;
+}
+.item > h1{
+  grid-column: span 2;
+  margin: 0;
+  text-align: center;
+}
+.cover{
+  display: grid;
+  place-items: center;
+}
+.cover > img{
+ max-height: 150px;
+ max-width: 100%
+}
+.data{
+  margin: 1rem;
+}
+.action-buttons{
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-evenly;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.action-buttons > button{
+  background-color: transparent;
+  outline: none;
+  border: none;
+
+  transition: scale .2s ease;
+
+  cursor: pointer;
+}
+.action-buttons > button:hover{
+  scale: 1.1;
+}
+.action-buttons > button:active{
+  scale: 1.03;
+}
+.red{
+  color: red;
+}
+.green{
+  color: green;
+}
+.approve{
+}
+.delete{
+}

@@ -1,0 +1,45 @@
+<header class='default-header' >
+  <logo />
+</header>
+<main class='default-main'>
+  <section class='default-content'>
+    <ul class='offers-list'>
+      <li *ngFor="let offer of offers" class='item'>
+        <h1>
+          {{ offer.title }}
+        </h1>
+        <a class='cover' href="/offer/{{ offer.id }}" >
+          <img src={{offer.cover}}/>
+        </a>
+        <div class='data'>
+          <div class='data-item'>
+            Категория
+            {{ Categories[offer.category] }}
+          </div>
+          <div class='data-item'>
+            Локация
+            {{ Countries[offer.location] }}
+          </div>
+          <div class='data-item'>
+            Цел
+            {{ offer.goal }}лв
+          </div>
+          <div class='data-item'>
+            Събрани
+            {{ offer.raised }}лв
+          </div>
+          <div *ngIf='offer.approved' class='data-item green'>
+            одобрено
+          </div>
+          <div *ngIf='!offer.approved' class='data-item red'>
+            чака одобрение
+          </div>
+          <div class='action-buttons'>
+            <button class='delete' (click)='delete(offer.id)'>Изтриване</button>
+            <button *ngIf="!offer.approved" class='approve' (click)='approve(offer.id)'>Одобри</button>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </section>
+</main>

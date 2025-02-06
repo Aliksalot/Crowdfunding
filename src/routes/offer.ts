@@ -79,15 +79,21 @@ offerRouter.post('/delete', authenticateJWT, async(req, res) => {
   const offerId = req.body.id;
   const userId = (req.session as any).userId.userId;
 
-  console.log(offerId, userId);
+  console.log('request to delete');
   const user = await prisma.user.findFirst({ where: { id: userId } });
 
   const hasRightToDelete = user?.isAdmin || user?.id === userId;
 
   if(hasRightToDelete){
+    console.log("passed has right to delete");
     try{
-      await prisma.offer.delete({ where: { id: offerId } });
-    }catch{
+      await prisma.fund.deleteMany({ where: { offerId }});
+      await prisma.comment.deleteMany({ where: { offerId }});
+      const result = await prisma.offer.delete({ where: { id: offerId } });
+      console.log(result);
+    }catch(e){
+      console.log("error with deletion");
+      console.log(e);
     }
     res.status(200);
   }else{
@@ -180,6 +186,38 @@ offerRouter.put('/fund', authenticateJWT, async(req: Request, res: Response) => 
     res.json({ status: PaymentStatus.SUCCESS });
   }catch{
     res.json({ status: PaymentStatus.FAIL });
+  }
+});
+
+offerRouter.put('/approve', authenticateJWT, async(req: Request, res: Response) => {
+
+  console.log("request to approve");
+  try{
+    const { id } = req.body;
+    const userId = (req.session as any).userId.userId;
+    console.log('userid: ', userId);
+
+    const user = await prisma.user.findFirst({ where: { id: userId }})
+
+    if(!user?.isAdmin){
+      console.log("401 only admin can approve");
+      res.status(401).json();
+      return;
+    }
+
+    const result = await prisma.offer.update({ 
+      where: { id },
+      data: {
+        approved: true
+      },
+    });
+
+    console.log(result);
+
+    res.status(200).json();
+  }catch(err){
+    console.log(err);
+    res.status(400).json(err);
   }
 });
 

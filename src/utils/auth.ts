@@ -12,19 +12,22 @@ export function authenticateJWT(
 	res  : Response,
 	next : NextFunction
 ) : any {
-  console.log(req.cookies);
+  console.log('request', req.originalUrl);
 	const token = req.cookies.authToken;
 
 	if(!token) {
+    console.log('err');
 		return res.status(401).send('Invalid token');
 	}
 
 	jwt.verify(token, JWT_SECRET, (err: any, decoded: any) => {
 		if(err) {
+      console.log('err');
 		  res.status(401).send("Authentication failed");
       return
 		}
 
+    console.log('continue');
 		(req.session as any).userId = decoded;
 		next();
 	});

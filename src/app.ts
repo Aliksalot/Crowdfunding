@@ -36,7 +36,6 @@ app.get('/', (req: Request, res: Response) => {
   res.send('test');
 })
 
-
 app.listen(API_PORT, () => {
   console.log(`Listening on ${API_PORT}.`);
 })
