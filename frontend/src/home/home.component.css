@@ -1,0 +1,7 @@
+.row-1{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+.row-1 ::ng-deep offer .offer{
+  margin: .5rem
+}

@@ -22,7 +22,7 @@ export class AccountComponent{
   Categories = Category;
   Countries = Country;
 
-
+  isAdmin: boolean = false;
   userEmail: string = '';
   userId: number = 0;
 
@@ -40,6 +40,7 @@ export class AccountComponent{
 
       }
     })
+    this.isAdmin = this.authService.getIsAdmin();
   }
 
   delete(id: number){

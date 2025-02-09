@@ -12,6 +12,7 @@ header{
   padding: 0;
   margin: 1rem auto;
   max-width: 800px;
+  width: 98%;
   gap: 1rem;
   display: flex;
   flex-direction: column;
