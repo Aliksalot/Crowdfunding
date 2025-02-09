@@ -3,9 +3,10 @@ import {NavbarComponent} from "../navbar/navbar.component";
 import { HttpClient } from "@angular/common/http";
 import { OfferWithRelations } from "../../../shared/types/extended-models";
 import { OfferCompComponent } from "../offer-comp/offer-comp.component";
+import { LoopComponent } from "../loop/loop.component";
 
 @Component({
-    imports: [ NavbarComponent, OfferCompComponent ],
+    imports: [ NavbarComponent, OfferCompComponent, LoopComponent ],
     templateUrl: '../home/home.component.html',
     styleUrl: '../home/home.component.css'
 })

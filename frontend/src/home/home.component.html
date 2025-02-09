@@ -5,11 +5,15 @@
 <main class='default-main'>
   <section class='default-content'>
     <section class='row-1'>
-      <offer />
+      <offer class='main-offer' />
       <div class='inner'>
         <offer />
         <offer />
       </div>
     </section>
+    <div class='row-1-divider'></div>
+    <loop 
+      [offers]="offers"
+    />
   </section>
 </main>

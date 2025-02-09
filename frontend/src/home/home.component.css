@@ -5,3 +5,34 @@
 .row-1 ::ng-deep offer .offer{
   margin: .5rem
 }
+.row-1-divider{
+  height: 2px;
+  width: 100%;
+  background-color: darkgray;
+}
+@media (max-width: 1200px){
+  .row-1{
+    grid-template-columns: 1fr 1fr;
+  }
+  .main-offer{
+    grid-column: span 2;
+  }
+  .inner{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 900px){
+  .row-1{
+    grid-template-columns: 1fr;
+  }
+  .inner{
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+  .row-1-divider{
+    display: none;
+  }
+}
