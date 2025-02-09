@@ -1,5 +1,42 @@
 .offer{
+  position: relative;
+
   flex-grow: 1;
   aspect-ratio: 16 / 9;
-  background-color: red;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+.info-cnt{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0) 100%);
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+.info-cnt > span{
+  grid-row: 3;
+  color: white;
+  margin: auto;
+  text-align: center;
+}
+.title{
+  color: white;
+  font-size: 1.8rem;
+  grid-column: span 3;
+  grid-row: 2;
+  margin: auto 1rem;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.offer:hover p, .offer:hover span{
+  color: #41980a;
 }

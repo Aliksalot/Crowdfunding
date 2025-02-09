@@ -5,15 +5,22 @@
 <main class='default-main'>
   <section class='default-content'>
     <section class='row-1'>
-      <offer class='main-offer' />
+      <offer 
+        class='main-offer'
+        [offer]="offers[0]"
+      />
       <div class='inner'>
-        <offer />
-        <offer />
+        <offer 
+          [offer]="offers[1]"
+        />
+        <offer 
+          [offer]="offers[2]"
+        />
       </div>
     </section>
     <div class='row-1-divider'></div>
     <loop 
-      [offers]="offers"
+      [offers]="offers.slice(3)"
     />
   </section>
 </main>

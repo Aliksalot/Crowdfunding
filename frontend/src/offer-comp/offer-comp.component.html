@@ -1,4 +1,22 @@
-<div class='offer'>
-
-</div>
+<a href='/offer/{{ offer.id }}'>
+  <div 
+    class='offer'
+    style="background-image: url('{{ offer.cover }}');"
+  >
+    <div class='info-cnt'>
+      <p class='title'> 
+        {{ offer.title }}
+      </p>
+      <span>
+        {{ categories[offer.category] }}
+      </span>
+      <span>
+        {{ locations[offer.location] }}
+      </span>
+      <span>
+        {{ offer.daysSinceCreation + ' дни от създаването' }}
+      </span>
+    </div>
+  </div>
+</a>
 

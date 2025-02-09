@@ -9,6 +9,7 @@ export type FundWithRelations = Fund & {
 export type OfferWithRelations = Offer & {
   comments: CommentWithRelations[],
   funds: Fund[]
+  daysSinceCreation?: number
 }
 
 export type CommentWithRelations = Comment & {

@@ -6,9 +6,10 @@ import { OfferCompComponent } from "../offer-comp/offer-comp.component";
 import { LoopComponent } from "../loop/loop.component";
 
 @Component({
-    imports: [ NavbarComponent, OfferCompComponent, LoopComponent ],
-    templateUrl: '../home/home.component.html',
-    styleUrl: '../home/home.component.css'
+  selector: 'home',
+  imports: [ NavbarComponent, OfferCompComponent, LoopComponent ],
+  templateUrl: '../home/home.component.html',
+  styleUrl: '../home/home.component.css'
 })
 
 export class HomeComponent{
@@ -22,6 +23,10 @@ export class HomeComponent{
     this.http.get("/api/offer").subscribe({
       next: (result) => {
         this.offers = result as unknown as OfferWithRelations[];
+        for(const offer of this.offers){
+          const diffInMili = Date.now() - new Date((offer as OfferWithRelations).createdAt).getTime();
+          offer.daysSinceCreation = Math.floor(diffInMili / ( 1000 * 60 * 60 * 24 ));
+        }
         console.log(this.offers);
         this.loading = false;
       },
