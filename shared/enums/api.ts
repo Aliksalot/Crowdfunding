@@ -17,3 +17,10 @@ export const PaymentStatusColor: Record<PaymentStatus, string> = {
   1: 'red',
   2: 'green'
 }
+export enum Sorts {
+  NEWEST = 'Най-нови',
+  OLDEST = 'Най-стари',
+  ALPHABETIC = 'Азбучен ред',
+  MOST_FUNDED = 'Най-финансирани',
+  LEAST_FUNDED = 'Най-нефинансирани'
+}

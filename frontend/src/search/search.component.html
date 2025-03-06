@@ -5,9 +5,22 @@
 
     <section class='selects'>
       <!--how to sort, date, location-->
-      <p-select />
-      <p-multiselect />
-      <p-multiselect />
+      <p-select 
+        [options]="sorts"
+        [(ngModel)]="selectedSort"
+      />
+      <p-multiselect 
+        [options]="categories"
+        placeholder='Категории'
+        [(ngModel)]="selectedCategories"
+        selectedItemsLabel="{0} избрани категории" 
+      />
+      <p-multiselect
+        [options]="countries"
+        placeholder='Държави'
+        [(ngModel)]="selectedCountries"
+        selectedItemsLabel="{0} избрани държави" 
+      />
     </section>
 
     <section class='search'>
