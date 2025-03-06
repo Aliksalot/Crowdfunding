@@ -14,7 +14,7 @@ offerRouter.get('/', authenticateJWT, async (req, res) => {
   res.json(offers);
 });
 
-offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
+offerRouter.put('/findOne', async (req, res) => {
 
   const where_filter = req.body || {};
 
@@ -59,7 +59,7 @@ offerRouter.put('/findOne', authenticateJWT, async (req, res) => {
   res.status(201);
 });
 
-offerRouter.post('/findMany', authenticateJWT, async (req, res) => {
+offerRouter.post('/findMany', async (req, res) => {
   const where_filter = req.body || {};
 
   try{

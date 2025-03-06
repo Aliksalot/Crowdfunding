@@ -17,6 +17,7 @@ userRouter.get('/all', authenticateJWT, async (req: Request, res: Response) => {
 userRouter.get('/', authenticateJWT, async(req: Request, res: Response) => {
 
   const user = await prisma.user.findFirst({ where: { id: (req.session as any).userId.userId }});
+  console.log(user);
   
   res.status(200).send([user?.email, user?.id]);
 

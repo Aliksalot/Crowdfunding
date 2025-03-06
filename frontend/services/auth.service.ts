@@ -29,12 +29,10 @@ export class AuthService{
     const request = this.http.post('/api/user/login', { email, passwordAttempt });
     request.subscribe({
       next: (result) => {
-        console.log(result);
         if(result){
-          console.log("type: ", typeof((result as any)[2]));
           this.loggedInEmail = (result as [string, string])[0] as string;
           this.loggedInId = (result as [string, string])[1] as string;
-          this.isAdmin = (result as [string, string, boolean][2] as boolean);
+          this.isAdmin = (result as [string, string, boolean])[2] as boolean;
           sessionStorage.setItem('e', this.loggedInEmail);
           sessionStorage.setItem('e_id', this.loggedInId as string);
           if(this.isAdmin){
@@ -75,6 +73,7 @@ export class AuthService{
   }
 
   getIsAdmin(): boolean {
+    console.log("Is user admin", sessionStorage.getItem('e_role') ? sessionStorage.getItem('e_role') : "bye");
     if(this.isAdmin === undefined){
       this.isAdmin = sessionStorage.getItem('e_role') === undefined ? null : sessionStorage.getItem('e_role') === UserRole.ADMIN;
     }

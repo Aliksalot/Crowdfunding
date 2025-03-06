@@ -20,7 +20,7 @@ export class HomeComponent{
   constructor(private http: HttpClient) { }
 
   ngOnInit(){
-    this.http.get("/api/offer").subscribe({
+    this.http.post("/api/offer/findMany", { approved: true }).subscribe({
       next: (result) => {
         this.offers = result as unknown as OfferWithRelations[];
         for(const offer of this.offers){
