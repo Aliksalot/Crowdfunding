@@ -12,12 +12,14 @@ import {OfferComponent} from '../offer/offer.component';
 import {PaymentComponent} from '../payment/payment.module';
 import {AdminComponent} from '../admin/admin.component';
 import {AdminGuard} from '../../admin.guard';
+import {SearchComponent} from '../search/search.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '', component: HomeComponent },
   { path: 'offer/:id', component: OfferComponent },
+  { path: 'search', component: SearchComponent },
 
   { path: 'initialize', component: CreateComponent, canActivate: [AuthGuard] },
   { path: 'account', component: AccountComponent , canActivate: [AuthGuard] },
