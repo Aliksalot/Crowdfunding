@@ -21,6 +21,9 @@ export class AuthService{
         this.loggedInId = (result as [string, string])[1] as string;
         sessionStorage.setItem('e', this.loggedInEmail as string);
         sessionStorage.setItem('e_id', this.loggedInId as string);
+      },
+      error: (err) => {
+        console.log("Couldn't log in");
       }
     })
   }

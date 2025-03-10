@@ -102,4 +102,11 @@ nav{
 .categories {
   margin: .5rem 0;
 }
+.categories > span > a{
+  text-decoration: none;
+  color: black;
+}
+.categories > span > a:hover{
+  color: var(--text-active);
+}
 

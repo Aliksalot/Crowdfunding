@@ -20,14 +20,13 @@ export class HomeComponent{
   constructor(private http: HttpClient) { }
 
   ngOnInit(){
-    this.http.post("/api/offer/findMany", { approved: true }).subscribe({
+    this.http.post("/api/offer/findMany", { search: { approved: true } }).subscribe({
       next: (result) => {
         this.offers = result as unknown as OfferWithRelations[];
         for(const offer of this.offers){
           const diffInMili = Date.now() - new Date((offer as OfferWithRelations).createdAt).getTime();
           offer.daysSinceCreation = Math.floor(diffInMili / ( 1000 * 60 * 60 * 24 ));
         }
-        console.log(this.offers);
         this.loading = false;
       },
       error: (error) => {

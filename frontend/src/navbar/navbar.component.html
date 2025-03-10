@@ -1,9 +1,9 @@
 <header>
   <nav>
     <logo />
-    <div class='search-cnt'>
-      <input placeholder='Търси по заглавие, категория, локация...' type='text' />
-    </div>
+    <form #searchForm="ngForm" class='search-cnt' (ngSubmit)="onSubmit(searchForm)">
+      <input placeholder='Търси по заглавие, съдържание, автор...' type='text' [(ngModel)]="searchText" name="searchText" />
+    </form>
     <div class='nav-buttons'>
       <button class='start-btn' routerLink='/initialize'>Създай оферта</button>
 
@@ -14,10 +14,12 @@
   <div class='results-container'>
   </div>
   <section class="categories">
-    <span> Cat1 </span>
-    <span> Cat2 </span>
-    <span> Cat3 </span>
-    <span> Cat4 </span>
-    <span> Cat5 </span>
+    <span *ngFor="let num of [0, 1, 2, 3, 4]"> <a href="/search?categories={{ categories[num].enum }}">
+        {{ categories[num].bg.split(' ')[0] }}
+    </a></span>
+    |
+    <span>
+      <a href='/search'>Търсене</a>
+    </span>
   </section>
 </header>

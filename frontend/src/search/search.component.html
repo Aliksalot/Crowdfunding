@@ -8,39 +8,84 @@
       <p-select 
         [options]="sorts"
         [(ngModel)]="selectedSort"
+        placeholder="Сортиране"
+        optionLabel="bg"
+        optionValue="enum"
       />
       <p-multiselect 
         [options]="categories"
         placeholder='Категории'
         [(ngModel)]="selectedCategories"
+        optionLabel="bg"
+        optionValue="enum"
         selectedItemsLabel="{0} избрани категории" 
       />
       <p-multiselect
         [options]="countries"
         placeholder='Държави'
+        optionLabel="bg"
+        optionValue="enum"
         [(ngModel)]="selectedCountries"
         selectedItemsLabel="{0} избрани държави" 
       />
     </section>
 
-    <section class='search'>
+    <section class='search' *ngIf="!!searchText">
+      <p>
+      Вие търсихте: <i>{{ searchText }}</i>
+      </p>
     </section>
 
     <ul class='results'>
 
-      <li class='results-title'>
+      <li class='results-title'*ngIf="!!searchText">
+        <h2>
+          Резултати по заглавие
+        </h2>
+        <hr />
+        <span *ngIf="!resultsTitle.length">
+          Няма резултати
+        </span>
+        <loop [offers]="resultsTitle"/>
       </li>
 
-      <li class='results-category'>
+      <li class='results-author'*ngIf="!!searchText">
+        <h2>
+          Резултати по автор
+        </h2>
+        <hr />
+
+        <span *ngIf="!resultsAuthor.length">
+          Няма резултати
+        </span>
+        <loop [offers]="resultsAuthor"/>
       </li>
 
-      <li class='results-location'>
-      </li>
+      <li class='results-text'*ngIf="!!searchText">
+        <h2>
+          Резултати по съдържание        
+        </h2>
+        <hr />
+        <span *ngIf="!resultsText.length">
+          Няма резултати
+        </span>
 
-      <li class='results-author'>
+        <loop [offers]="resultsText"/>
       </li>
 
       <li class='results-all'>
+        <h2>
+          Всички резултати
+        </h2>
+        <hr />
+
+        <span *ngIf="!results.length">
+          Няма резултати
+        </span>
+
+        <loop 
+          [offers]="results"
+        />
       </li>
 
     </ul>
