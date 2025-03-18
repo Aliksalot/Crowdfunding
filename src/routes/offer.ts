@@ -65,7 +65,9 @@ offerRouter.post('/findMany', async (req, res) => {
   console.log(where_filter, orderBy);
   try{
     const offers = await prisma.offer.findMany({ 
-      where: where_filter,
+      where: {
+        ...where_filter,
+      },
       orderBy,
     });
     res.json(offers);

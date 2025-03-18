@@ -112,7 +112,13 @@ export class SearchComponent{
         default: console.error("Invalid sort");
       }
 
-      return this.httpClient.post('/api/offer/findMany', { search, order });
+      return this.httpClient.post('/api/offer/findMany', {
+        search: {
+          ...search,
+          approved: true
+        },
+        order
+      });
   }
 
   private addUnique(arr1: OfferWithRelations[], arr2: OfferWithRelations[]){
