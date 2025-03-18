@@ -141,12 +141,19 @@ offerRouter.post('/:id', authenticateJWT, async(req: Request, res: Response) => 
   if(!id){ res.sendStatus(400); return; }
 
   try{
-    const result = await prisma.offer.update({ where: { id: parseInt(id) }, data: newOffer });
+    const result = await prisma.offer.update({ where: { id: parseInt(id) }, data:{
+      text: newOffer.text,
+      title: newOffer.title,
+      category: newOffer.category,
+      location: newOffer.location,
+      goal: newOffer.goal
+    } });
 
     console.log(result);
-    res.json({});
-  }catch{
-    res.json({});
+    res.json(result);
+  }catch(error){
+    console.log(error);
+    res.status(400).json({});
   }
 })
 

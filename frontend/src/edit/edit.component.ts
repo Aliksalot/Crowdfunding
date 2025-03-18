@@ -8,7 +8,7 @@ import {CommonModule} from '@angular/common';
 import { EnumToArrayPipe } from '../../pipes/enum-to-array.pipe';
 import { EditorModule } from 'primeng/editor';
 import { FormsModule } from '@angular/forms';
-import { Country, Category } from '@prisma/client';
+import { Country, Category } from '../../../shared/enums/Categories';
 
 @Component({
   standalone: true,
@@ -51,11 +51,16 @@ export class EditComponent {
   }
 
   saveChanges() {
+    console.log("Sending");
+    console.log(this.offer);
     this.http.post(`/api/offer/${this.offerId}`, this.offer).subscribe({
       next: (result) => {
-        console.log(result)
+        console.log("OK");
+        console.log(result);
+        this.offer = result as Offer;
       },
       error: (error) => {
+        console.log("NOT OK");
         console.log(error)
       }
     });

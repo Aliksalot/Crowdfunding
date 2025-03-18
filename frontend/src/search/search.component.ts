@@ -70,10 +70,10 @@ export class SearchComponent{
   }
 
   set selectedSort(value: any){
-    this._selectedSort = value;
     this.route.queryParams.subscribe(params => {
-      this.router.navigate(['/search'], { queryParams: { ...params, search: value } })
+      this.router.navigate(['/search'], { queryParams: { ...params, sort: value } })
     })
+    this._selectedSort = value;
     console.log(value);
   }
   get selectedSort(): Sorts {
@@ -146,7 +146,10 @@ export class SearchComponent{
         this.selectedCountries = Array.isArray(params['countries'])
           ? params['countries']
           : [ params['countries'] ];
+      }
 
+      if(params['sort']){
+        this.selectedSort = params['sort'] || Sorts.NEWEST;
       }
 
       this.search({ title: { contains: this.searchText, mode: 'insensitive' } }).subscribe({
