@@ -5,6 +5,13 @@
 
     <section class='selects'>
       <!--how to sort, date, location-->
+      <p-button
+          [disabled]='selectedCountries.length <= 0 && selectedCategories.length <= 0'
+          (click)='clearFilters()'
+      >
+
+        Изчисти филтри
+      </p-button>
       <p-select 
         [options]="sorts"
         [(ngModel)]="selectedSort"

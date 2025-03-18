@@ -7,10 +7,10 @@ import { FormsModule } from "@angular/forms";
 import { EnumToArrayPipe } from "../../pipes/enum-to-array.pipe";
 import {Sorts} from "../../../shared/enums/api";
 import { Category, Country } from "../../../shared/enums/Categories";
+import { ButtonModule } from 'primeng/button';
 import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import { Prisma } from "@prisma/client";
-import { Offer } from "@prisma/client";
 import { LoopComponent } from "../loop/loop.component";
 import { OfferWithRelations } from "../../../shared/types/extended-models";
 
@@ -21,6 +21,7 @@ import { OfferWithRelations } from "../../../shared/types/extended-models";
   imports: [
     NavbarComponent,
     CommonModule,
+    ButtonModule,
     SelectModule,
     MultiSelectModule,
     EnumToArrayPipe,
@@ -58,11 +59,11 @@ export class SearchComponent{
   }
 
   set selectedCountries(value: any){
+    console.log("setting countries to", value);
+    this._selectedCountries = value;
     this.route.queryParams.subscribe(params => {
       this.router.navigate(['/search'], { queryParams: { ...params, countries: value } })
     })
-    this._selectedCountries = value;
-    console.log(value);
   }
   get selectedCountries(): Country[] {
 
@@ -70,11 +71,10 @@ export class SearchComponent{
   }
 
   set selectedSort(value: any){
+    this._selectedSort = value;
     this.route.queryParams.subscribe(params => {
       this.router.navigate(['/search'], { queryParams: { ...params, sort: value } })
     })
-    this._selectedSort = value;
-    console.log(value);
   }
   get selectedSort(): Sorts {
     return this._selectedSort;
@@ -127,7 +127,6 @@ export class SearchComponent{
 
   ngOnInit(){
     this.route.queryParams.subscribe(params => {
-      console.log(params);
       this.results = [];
       this.resultsText = [];
       this.resultsTitle = [];
@@ -135,14 +134,12 @@ export class SearchComponent{
 
       this.searchText = (params['text']);
       if(params['categories']){
-        console.log(params['categories'], Array.isArray(params['categories']));
         this.selectedCategories = Array.isArray(params['categories'])
           ? params['categories']
           : [ params['categories'] ];
 
       }
       if(params['countries']){
-        console.log(params['countries']);
         this.selectedCountries = Array.isArray(params['countries'])
           ? params['countries']
           : [ params['countries'] ];
@@ -173,5 +170,9 @@ export class SearchComponent{
         }
       })
     })
+  }
+
+  clearFilters() {
+    window.location.href = '/search';
   }
 }
