@@ -1,20 +1,20 @@
 import { Router, Request, Response } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { CommentWithRelations, OfferWithRelations } from '../../shared/types/extended-models';
-import {authenticateJWT, createJWT, hashPassword, verifyPassword} from '../utils/auth';
+import {authenticateJWT, noteAdminAuth} from '../utils/auth';
 import {PaymentStatus} from '../../shared/enums/api';
 
 const offerRouter = Router();
 
 const prisma = new PrismaClient();
 
-offerRouter.get('/', authenticateJWT, async (req, res) => {
+offerRouter.get('/', authenticateJWT, noteAdminAuth, async (req, res) => {
   const offers = await prisma.offer.findMany();
 
   res.json(offers);
 });
 
-offerRouter.put('/findOne', async (req, res) => {
+offerRouter.put('/findOne', noteAdminAuth, async (req, res) => {
 
   const where_filter = req.body || {};
 
@@ -59,7 +59,7 @@ offerRouter.put('/findOne', async (req, res) => {
   res.status(201);
 });
 
-offerRouter.post('/findMany', async (req, res) => {
+offerRouter.post('/findMany', noteAdminAuth, async (req, res) => {
   const where_filter = req.body.search || {};
   const orderBy = req.body.order || {};
   console.log(where_filter, orderBy);
@@ -80,7 +80,7 @@ offerRouter.post('/findMany', async (req, res) => {
   res.status(201);
 });
 
-offerRouter.post('/delete', authenticateJWT, async(req, res) => {
+offerRouter.post('/delete', authenticateJWT, noteAdminAuth, async(req, res) => {
   
   const offerId = req.body.id;
   const userId = (req.session as any).userId.userId;
@@ -107,7 +107,7 @@ offerRouter.post('/delete', authenticateJWT, async(req, res) => {
   }
   res.send();
 })
-offerRouter.post('/new', authenticateJWT, async (req, res) => {
+offerRouter.post('/new', authenticateJWT, noteAdminAuth, async (req, res) => {
 
   const userId = (req.session as any).userId.userId;
   console.log(userId, req.body);
@@ -134,7 +134,7 @@ offerRouter.post('/new', authenticateJWT, async (req, res) => {
   res.status(200).json({});
 })
 
-offerRouter.post('/:id', authenticateJWT, async(req: Request, res: Response) => {
+offerRouter.post('/:id', authenticateJWT, noteAdminAuth, async(req: Request, res: Response) => {
 
   const id = req.params.id;
 
@@ -159,7 +159,7 @@ offerRouter.post('/:id', authenticateJWT, async(req: Request, res: Response) => 
   }
 })
 
-offerRouter.put('/comment', authenticateJWT, async(req: Request, res: Response) => {
+offerRouter.put('/comment', authenticateJWT, noteAdminAuth, async(req: Request, res: Response) => {
   //text, replyto
   
   try{
@@ -176,7 +176,7 @@ offerRouter.put('/comment', authenticateJWT, async(req: Request, res: Response) 
   res.json({});
 });
 
-offerRouter.put('/fund', authenticateJWT, async(req: Request, res: Response) => {
+offerRouter.put('/fund', authenticateJWT, noteAdminAuth, async(req: Request, res: Response) => {
   try{
     const { offerId, value } = req.body;
 
@@ -202,7 +202,7 @@ offerRouter.put('/fund', authenticateJWT, async(req: Request, res: Response) => 
   }
 });
 
-offerRouter.put('/approve', authenticateJWT, async(req: Request, res: Response) => {
+offerRouter.put('/approve', authenticateJWT, noteAdminAuth, async(req: Request, res: Response) => {
 
   console.log("request to approve");
   try{
@@ -234,7 +234,19 @@ offerRouter.put('/approve', authenticateJWT, async(req: Request, res: Response) 
   }
 });
 
+offerRouter.get("/logs", authenticateJWT, noteAdminAuth, async (req, res) => {
+  const userId = (req.session as any).userId.userId;
+
+  const user = await prisma.user.findFirst({ where: { id: userId }})
+
+  if(!user?.isAdmin){
+    console.log("[ERROR] 401 only admin look at the admin logs");
+    res.status(401).json();
+    return;
+  }
+
+  const offers = await prisma.adminAction.findMany({ include: { admin: true } });
+  res.send(offers);
+});
+
 export default offerRouter;
-
-
-

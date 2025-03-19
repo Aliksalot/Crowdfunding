@@ -31,7 +31,7 @@ export class AccountComponent{
   constructor(private authService: AuthService, private http: HttpClient, private router: Router){
     [this.userEmail, this.userId] = authService.getLoggedInEmail();
 
-    this.http.post('/api/offer/findMany', { creator: this.userId }).subscribe({
+    this.http.post('/api/offer/findMany', { search: {creator: this.userId }}).subscribe({
       next: (result) => {
         console.log(result);
         if(result){

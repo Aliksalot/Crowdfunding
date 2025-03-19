@@ -17,6 +17,7 @@ model AdminAction {
   id           Int      @id @default(autoincrement())
   adminId      Int
   executedAt   DateTime @default(now())
+  
   admin        User     @relation(fields: [adminId], references: [id])
 }
 

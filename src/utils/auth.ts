@@ -1,11 +1,44 @@
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import {NextFunction, Request, Response} from 'express'
+import { PrismaClient } from '@prisma/client';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
+const prisma = new PrismaClient();
+
 const JWT_SECRET = process.env.JWT_SECRET as jwt.Secret
+
+export function noteAdminAuth(
+	req  : Request,
+	res  : Response,
+	next : NextFunction
+): void {
+
+  try{
+    const userId = (req.session as any).userId.userId;
+
+    prisma.user
+    .findFirst({where:{id:userId}})
+    .then( async(user) => {
+      if(user && user.isAdmin){
+        await prisma.adminAction.create({
+          data: { adminId: userId }
+        });
+        console.log("[INFO] Added admin action");
+      }
+    })
+    .catch((error) => {
+      console.log(`[ERROR] Couldn't add admin action: ${error}`);
+    })
+    .finally(() => {
+      next();
+    })
+  }catch(error){
+    console.log(`[ERROR] Unexpected error on add admin action: ${error}`);
+  }
+}
 
 export function authenticateJWT(
 	req  : Request,
