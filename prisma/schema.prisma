@@ -13,6 +13,13 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model AdminAction {
+  id           Int      @id @default(autoincrement())
+  adminId      Int
+  executedAt   DateTime @default(now())
+  admin        User     @relation(fields: [adminId], references: [id])
+}
+
 model User {
   id           Int      @id @default(autoincrement())
   email        String   @unique
@@ -22,6 +29,7 @@ model User {
   offers       Offer[]
   comments     Comment[]
   funds        Fund[]
+  adminActions AdminAction[]
 }
 
 model Offer {
