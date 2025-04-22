@@ -19,6 +19,9 @@
       <section class='select location' (input)='onStepOneInput()'>
         <h3>Къде ще разполжите бизнеса си?</h3>
         <select [(ngModel)]="model.location">
+          <option [value]="'Bulgaria'">
+            България
+          </option>
           <option *ngFor="let country of countries | enumToArray" [value]="country.key">
           {{ country.val }}
           </option>

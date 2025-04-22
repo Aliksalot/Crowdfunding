@@ -1,4 +1,4 @@
-<a href='/offer/{{ offer.id }}'>
+<a *ngIf="!!offer" href='/offer/{{ offer.id }}'>
   <div 
     class='offer'
     style="background-image: url('{{ offer.cover }}');"

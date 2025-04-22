@@ -17,6 +17,10 @@ export function noteAdminAuth(
 ): void {
 
   try{
+    if(!((req.session as any).userId && (req.session as any).userId.userId)){
+      next();
+      return;
+    }
     const userId = (req.session as any).userId.userId;
 
     prisma.user
@@ -45,12 +49,11 @@ export function authenticateJWT(
 	res  : Response,
 	next : NextFunction
 ) : any {
-  console.log('request', req.originalUrl);
 	const token = req.cookies.authToken;
 
 	if(!token) {
     console.log('err');
-		return res.status(401).send('Invalid token');
+		return res.status(401).send(`Invalid token ${req.originalUrl}`);
 	}
 
 	jwt.verify(token, JWT_SECRET, (err: any, decoded: any) => {
@@ -60,7 +63,6 @@ export function authenticateJWT(
       return
 		}
 
-    console.log('continue');
 		(req.session as any).userId = decoded;
 		next();
 	});
