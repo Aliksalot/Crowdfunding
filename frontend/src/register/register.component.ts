@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Form, FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UserStatus } from '../../../shared/enums/api';
+import { Router } from '@angular/router';
 import { Register } from './register';
 import {LogoComponent} from '../logo/logo.component';
 
@@ -21,7 +22,7 @@ export class RegisterComponent {
 
   isEmailTaken = false;
 
-  constructor(private http: HttpClient, private fb: FormBuilder) {
+  constructor(private http: HttpClient, private fb: FormBuilder, private router: Router) {
 
     this.form = fb.group({
       pass: [
@@ -56,6 +57,7 @@ export class RegisterComponent {
         next: (result) => {
           switch((result as any).status as UserStatus){
             case UserStatus.CREATED: //TODO redirect
+              this.router.navigate(['/account']);
               break;
             case UserStatus.EMAIL_TAKEN:
               this.isEmailTaken = true;

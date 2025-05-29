@@ -58,3 +58,10 @@ main > section > div > a {
   margin-left: 3pt;
 }
 
+.register-button{
+  border: none;
+  box-shadow: 0 0 .5rem rgba(0, 0, 0, .2);
+  padding: .5rem 1rem;
+  border-radius: .7rem;
+  cursor: pointer;
+}
