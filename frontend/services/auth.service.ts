@@ -59,8 +59,15 @@ export class AuthService{
     sessionStorage.removeItem('e');
     sessionStorage.removeItem('e_id');
     sessionStorage.removeItem('e_role');
-    this.http.get('/logout');
-    this.router.navigate(['/']);
+    this.http.get('/api/user/logout').subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
+      },
+      error: (err) => {
+        //this.router.navigate(['/login']);
+        console.log(err);
+      }
+    });
   }
 
   getLoggedInEmail(): [string, number]{
